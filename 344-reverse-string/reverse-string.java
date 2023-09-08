@@ -6,11 +6,11 @@ class Solution {
         while (left < end) {
       
             char temp = s[left];
-            s[left] = s[end];
-            s[end] = temp;
+            s[left++] = s[end];
+            s[end--] = temp;
       
-            left ++;
-            end --;
+            //left ++;
+            //end --;
         }
     }
 }
