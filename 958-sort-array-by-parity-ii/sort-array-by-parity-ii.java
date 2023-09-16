@@ -15,6 +15,6 @@ class Solution {
             k+=2;
             }
         }
-        return(result);
+        return result;
     }
 }
