@@ -1,61 +1,17 @@
-// /**
-//  * Definition for a binary tree node.
-//  * public class TreeNode {
-//  *     int val;
-//  *     TreeNode left;
-//  *     TreeNode right;
-//  *     TreeNode() {}
-//  *     TreeNode(int val) { this.val = val; }
-//  *     TreeNode(int val, TreeNode left, TreeNode right) {
-//  *         this.val = val;
-//  *         this.left = left;
-//  *         this.right = right;
-//  *     }
-//  * }
-//  */
-// class Solution {
-//     public List<List<Integer>> levelOrderBottom(TreeNode root) {
+public class Solution {
+        public List<List<Integer>> levelOrderBottom(TreeNode root) {
+            List<List<Integer>> wrapList = new LinkedList<List<Integer>>();
+            levelMaker(wrapList, root, 0);
+            return wrapList;
+        }
         
-//     }
-// }
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    public List<List<Integer>> levelOrderBottom(TreeNode root) {
-        List<List<Integer>> ans = new ArrayList<>();
-        if(root == null){
-            return ans;
-        }
-        Queue<TreeNode> que = new LinkedList<>();
-        que.add(root);
-        while(que.size() > 0){
-            int sz = que.size();
-            List<Integer> temp = new ArrayList<>();
-            while(sz-- > 0){
-                TreeNode rem = que.remove();
-                temp.add(rem.val);
-                if(rem.left != null){
-                    que.add(rem.left);
-                }
-                if(rem.right != null){
-                    que.add(rem.right);
-                }
+        public void levelMaker(List<List<Integer>> list, TreeNode root, int level) {
+            if(root == null) return;
+            if(level >= list.size()) {
+                list.add(0, new LinkedList<Integer>());
             }
-            ans.add(0,temp);
+            levelMaker(list, root.left, level+1);
+            levelMaker(list, root.right, level+1);
+            list.get(list.size()-level-1).add(root.val);
         }
-        return ans;
     }
-}
