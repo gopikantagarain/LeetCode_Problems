@@ -31,17 +31,10 @@ class Solution {
         StringBuilder f = new StringBuilder();
         check(root,startValue,s);
         check(root,destValue,f);
-        String res = "";
-        int i = 0;
-        while(i==0 && i<f.length() && i<s.length() && s.charAt(s.length()-1-i) == f.charAt(f.length()-1-i)){
-                s.deleteCharAt(s.length()-1-i);
-                f.deleteCharAt(f.length()-1-i); 
-        }   
-        for(int j = 0; j < s.length(); j++)
-            res += "U";
-        for(int j = f.length()-1; j >= 0; j--){
-            res += f.charAt(j);
-        }
-        return res;
+         int i = 0;
+        int max_i = Math.min(f.length(), s.length());
+        while (i < max_i && s.charAt(s.length() - i - 1) == f.charAt(f.length() - i - 1))
+            ++i;
+        return "U".repeat(s.length() - i) + f.reverse().toString().substring(i);
     }
 }
