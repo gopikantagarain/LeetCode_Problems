@@ -8,9 +8,11 @@ class Solution {
             else{
                 nums[count]=nums[i];
                 count++;
-                
             }
         }
         return count;
     }
 }
+
+
+
