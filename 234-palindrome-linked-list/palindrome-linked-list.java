@@ -9,16 +9,39 @@
  * }
  */
 class Solution {
-    ListNode curr;
-    public boolean isPalindrome(ListNode head) {
-        curr = head;
-        return solve(head);
+    public static ListNode reversedLL(ListNode head){
+        ListNode prev=null;
+        ListNode temp=head;
+        while(temp != null){
+            ListNode curr=temp.next;
+            temp.next=prev;
+            prev=temp;
+            temp=curr;
+        }
+        return prev;
     }
-
-    public boolean solve(ListNode head) {
-        if(head == null) return true;
-        boolean ans = solve(head.next) && head.val == curr.val;
-        curr = curr.next;
-        return ans;
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) 
+            return true;
+        ListNode slow=head;
+        ListNode fast=head;
+        while(fast.next != null && fast.next.next != null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        ListNode newHead=reversedLL(slow.next);
+        ListNode first=head;
+        ListNode second=newHead;
+        while(second != null){
+            if(first.val !=second.val){
+                reversedLL(newHead);
+                return false;
+            }
+            first=first.next;
+            second=second.next;
+        }
+        reversedLL(newHead);
+        return true;
+        
     }
 }
